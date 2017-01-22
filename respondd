@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 const dgram = require('dgram')
-const socket = dgram.createSocket('udp6')
+const socket = dgram.createSocket({type: 'udp6', reuseAddr: true})
 const fs = require('fs')
+const _ = require('lodash')
 const zlib = require('zlib')
 const os = require('os')
 const process = require('child_process')
@@ -12,6 +13,8 @@ const defConfig = {
   "bat_iface": "bat0",
   "mcast_group": "ff02::2:1001",
   "mcast_iface": "bat0",
+  "mesh_iface": "mesh-vpn",
+  "bin_path": "/opt/node-respondd/",
   "port": "1001",
   "site_code": undefined
 }
@@ -40,7 +43,7 @@ function getNodeinfo() {
     "system": {
       "site_code": getConfig("site_code")
     },
-    "hostname": os.hostname(),
+    "hostname": os.hostname()+" ("+getConfig("bat_iface")+")",
     "hardware": {
       "model": os.cpus()[0].model,
       "nproc": os.cpus().length
@@ -66,7 +69,7 @@ function getStatistics() {
 
 function getNeighbours() {
   return {
-    "batadv": JSON.parse(evalExec("sudo ./bat-list-neighbours"))
+    "batadv": JSON.parse(evalExec("sudo "+getConfig("bin_path")+"bat-list-neighbours"))
   }
 }
 
@@ -146,7 +149,7 @@ function getNodeId() {
 }
 
 function getPrimaryMac() {
-  return getMac(getConfig("mcast_iface"));
+  return getMac(getConfig("mesh_iface"));
 }
 
 function getMac(iface) {
@@ -173,8 +176,12 @@ function getData(what) {
 
 var config = {}
 
+var argv = require('minimist')(myproc.argv.slice(2))
+
+argv.config = _.get(argv, 'config', './config.json')
+
 try {
-  config = JSON.parse(fs.readFileSync("./config.json"))
+  config = JSON.parse(fs.readFileSync(argv.config, 'utf8'))
 } catch (err) {
   console.log("no config file found")
 }

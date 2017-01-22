@@ -1,0 +1,10 @@
+[Unit]
+Description=The node-respondd server provides data about this node to the local network (%I).
+
+[Service]
+Type=simple
+WorkingDirectory=/etc/node-respondd/%I/
+ExecStart=/usr/bin/node --harmony /opt/node-respondd/respondd
+
+[Install]
+WantedBy=multi-user.target

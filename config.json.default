@@ -2,7 +2,9 @@
   "bat_iface": "bat0",
   "mcast_group": "ff02::2:1001",
   "mcast_iface": "bat0",
+  "mesh_iface": "mesh-vpn",
   "port": "1001",
+  "bin_path": "/opt/node-respondd",
   "site_code": undefined
 }
 

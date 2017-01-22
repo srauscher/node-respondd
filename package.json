@@ -1,0 +1,25 @@
+{
+  "name": "node-respondd",
+  "version": "1.0.0",
+  "description": "Collect data from Freifunk networks and provide it in serveral formats",
+  "main": "respondd.js",
+  "dependencies": {
+    "lodash": "^4.2.1",
+    "minimist": "^1.2.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node node-respondd.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/srauscher/hopglass.git"
+  },
+  "author": "Stefan Rauscher <freifunk@aptx-4869.de>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/srauscher/hopglass/issues"
+  },
+  "homepage": "https://github.com/srauscher/hopglass#readme"
+}

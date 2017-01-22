@@ -1,11 +1,17 @@
 #!/usr/bin/env node
 
 const fs = require('fs')
+const _ = require('lodash')
 const netIfaces = require('os').networkInterfaces()
 
 var batIface = "bat0"
+
+var argv = require('minimist')(process.argv.slice(2))
+
+argv.config = _.get(argv, 'config', './config.json')
+
 try {
-  var c = JSON.parse(fs.readFileSync("./config.json")).bat_iface
+  var c = JSON.parse(fs.readFileSync(argv.config, 'utf8')).bat_iface
   if (c != null) batIface = c.replace(/[^A-Za-z0-9\-_\.]/g, '')
 } catch (ignored) {
 }
