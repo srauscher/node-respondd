@@ -201,7 +201,7 @@ socket.on('error', (err) => {
 socket.on('message', (msg, rinfo) => {
   if (!rinfo.address.startsWith("fe80:")) return
   msg = msg.toString()
-  console.log("message from: "+rinfo.address+": "+msg)
+//  console.log("message from: "+rinfo.address+": "+msg)
   if (msg.startsWith("GET ")) {
     // Multi case
     var whats = msg.substring(4).split(" ")
