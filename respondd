@@ -33,6 +33,10 @@ function getNodeinfo() {
       },
       "tunneldigger": {
         "enabled": isProcessRunning("l2tp_broker")
+      },
+      "firmware": {
+        "base": evalExec("lsb_release -is"),
+	"release": evalExec("lsb_release -ds")
       }
     },
     "network": {
