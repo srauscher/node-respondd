@@ -5,6 +5,7 @@
   "mesh_iface": "mesh-vpn",
   "port": "1001",
   "bin_path": "/opt/node-respondd",
-  "site_code": undefined
+  "site_code": undefined,
+  "role": "gw"
 }
 

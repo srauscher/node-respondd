@@ -16,7 +16,8 @@ const defConfig = {
   "mesh_iface": "mesh-vpn",
   "bin_path": "/opt/node-respondd/",
   "port": "1001",
-  "site_code": undefined
+  "site_code": undefined,
+  "role": "gw"
 }
 
 function getNodeinfo() {
@@ -45,6 +46,7 @@ function getNodeinfo() {
       "mac": getPrimaryMac()
     },
     "system": {
+      "role": getConfig("role"),
       "site_code": getConfig("site_code")
     },
     "hostname": os.hostname()+" ("+getConfig("bat_iface")+")",
