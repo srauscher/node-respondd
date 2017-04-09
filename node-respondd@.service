@@ -4,7 +4,7 @@ Description=The node-respondd server provides data about this node to the local 
 [Service]
 Type=simple
 WorkingDirectory=/etc/node-respondd/%I/
-ExecStart=/usr/bin/node --harmony /opt/node-respondd/respondd
+ExecStart=/usr/bin/nice -n 10 /usr/bin/ionice -c 3 /usr/bin/node --harmony /opt/node-respondd/respondd
 Restart=always
 
 [Install]
